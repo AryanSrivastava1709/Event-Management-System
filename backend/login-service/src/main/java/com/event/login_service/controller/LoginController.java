@@ -1,7 +1,6 @@
 package com.event.login_service.controller;
 
 import com.event.login_service.dto.LoginRequest;
-import com.event.login_service.dto.LoginResponse;
 import com.event.login_service.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +16,8 @@ public class LoginController {
     private LoginService loginService;
     
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        return ResponseEntity.ok(loginService.login(loginRequest));
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
+        return loginService.login(loginRequest);
     }
     
-    @GetMapping("/verify")  //for testing purposes
-    public ResponseEntity<Boolean> verifyToken(@RequestParam String token) {
-        return ResponseEntity.ok(loginService.verifyToken(token));
-    }
 }
