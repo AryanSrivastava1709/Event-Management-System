@@ -11,6 +11,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+
+    //This method is used to configure the security filter chain and only allows access to the registration endpoint
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf().disable().authorizeHttpRequests()
@@ -20,6 +23,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //This method is used to encode the password using BCryptPasswordEncoder
 
     @Bean
     public PasswordEncoder passwordEncoder(){

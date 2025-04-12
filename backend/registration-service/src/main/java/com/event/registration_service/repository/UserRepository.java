@@ -10,5 +10,7 @@ import com.event.registration_service.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
+
+    //The method findByEmail is used to find the user by email and is automatically implemented by Spring Data JPA
     Optional<User> findByEmail(String email);
 }
