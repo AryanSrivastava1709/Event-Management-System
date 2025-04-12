@@ -30,6 +30,17 @@
             "mainClass": "com.event.gateway_api.GatewayApiApplication",
             "projectName": "gateway-api",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=64166 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=gateway-api"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LoginServiceApplication<login-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.event.login_service.LoginServiceApplication",
+            "projectName": "login-service",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]
