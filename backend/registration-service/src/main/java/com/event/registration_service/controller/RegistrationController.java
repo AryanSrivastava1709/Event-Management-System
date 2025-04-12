@@ -23,6 +23,8 @@ public class RegistrationController {
     @Autowired
     private RegistrationService registrationService;
 
+
+    //The @Valid annotation is used to validate the request body and if there are any validation errors, it will throw a MethodArgumentNotValidException
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) throws Exception {
         return registrationService.registerUser(registerRequest);

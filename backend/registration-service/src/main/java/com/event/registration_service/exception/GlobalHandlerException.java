@@ -9,6 +9,18 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+
+
+/*
+ * This class is used to handle the exceptions globally and return the response according to the exception
+ * It uses @RestControllerAdvice annotation to handle the exceptions globally
+ * It uses @ExceptionHandler annotation to handle the exceptions
+ * It uses ResponseEntity to return the exception response
+ * This class basically handles the MethodArgumentNotValidException , UserAlreadyExistsException  and all other generic exceptions
+ * It returns the response in the form of Map<String, String> where key is the field name and value is the error message
+ */
+
+
 @RestControllerAdvice
 public class GlobalHandlerException {
     
