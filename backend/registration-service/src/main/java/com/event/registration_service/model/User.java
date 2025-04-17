@@ -15,6 +15,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+// This class is used to create the user table or to communicate with it in the database
+
 @Entity
 @Table(name = "users")
 @Data

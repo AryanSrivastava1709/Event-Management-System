@@ -95,6 +95,8 @@ Awesome! Based on the models we just discussed, here is a clear and simple **ER 
 +---------------------+       |     price           |       +---------------------+
                               |     available_seats |
                               |     organizer_name  |
+                              |     image_url       |
+                              |     status          |
                               +---------------------+
 
              ▲                                 ▲

@@ -11,6 +11,7 @@ import com.event.registration_service.exception.UserAlreadyExistsException;
 import com.event.registration_service.model.User;
 import com.event.registration_service.repository.UserRepository;
 
+// This class is used to implement the registration service
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
