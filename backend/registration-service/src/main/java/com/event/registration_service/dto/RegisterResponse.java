@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+// This class is used to send the registration response to the user
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

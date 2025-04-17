@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/auth")
 public class LoginController {
 
+    //This is a controller to get the login request and call the login service and also it validates the request
+
     @Autowired
     private LoginService loginService;
     

@@ -13,6 +13,17 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/*
+ * This class is used to load the user details from the database
+ * It implements the UserDetailsService interface and overrides the loadUserByUsername method
+ * It uses the UserRepository to get the user details from the database
+ * It returns the UserDetails object which contains the user details
+ * It uses the User class to get the user details from the database
+ * It uses the GrantedAuthority interface to get the authorities of the user
+ * It uses the SimpleGrantedAuthority class to get the authorities of the user
+ */
+
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -21,8 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+        User user = userRepository.findByEmail(email).orElse(null);
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));

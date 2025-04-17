@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// This is a class to get the login request and validate the request
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

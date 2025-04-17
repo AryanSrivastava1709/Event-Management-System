@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+//This class is used to receive the registration request from the user
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
