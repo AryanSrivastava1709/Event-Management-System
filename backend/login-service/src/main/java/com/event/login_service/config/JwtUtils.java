@@ -1,11 +1,13 @@
-package com.event.login_service.security;
+package com.event.login_service.config;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
-import java.util.Base64;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,16 +32,8 @@ public class JwtUtils {
 
     @Value("${app.jwt.expiration}")
     private int jwtExpirationMs;
-    
-    @Value("${app.jwt.refresh-expiration}")
-    private int jwtRefreshExpirationMs;
 
     //generation of the key and token
-
-    private SecretKey getSignKey() {
-        byte[] keyBytes = Base64.getDecoder().decode(jwtSecret);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
 
 
     public String generateToken(String email, String role) {
@@ -50,12 +44,14 @@ public class JwtUtils {
 
     
     private String createToken(Map<String, Object> claims, String subject, int expiration) {
+
+        SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()
                 .claims(claims)
                 .subject(subject)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSignKey())
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 }

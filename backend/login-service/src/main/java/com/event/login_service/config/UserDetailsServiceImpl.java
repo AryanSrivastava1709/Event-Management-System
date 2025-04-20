@@ -1,4 +1,4 @@
-package com.event.login_service.security;
+package com.event.login_service.config;
 
 import com.event.login_service.model.User;
 import com.event.login_service.repository.UserRepository;

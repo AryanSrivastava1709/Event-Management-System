@@ -97,6 +97,8 @@ Awesome! Based on the models we just discussed, here is a clear and simple **ER 
                               |     organizer_name  |
                               |     image_url       |
                               |     status          |
+                              |     created_at      |
+                              |     updated_at      |
                               +---------------------+
 
              ▲                                 ▲
