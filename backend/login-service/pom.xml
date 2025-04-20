@@ -79,7 +79,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- JWT Libraties for creating and sending the tokens, have not used jackson as it only used for the parsing the json token -->
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
