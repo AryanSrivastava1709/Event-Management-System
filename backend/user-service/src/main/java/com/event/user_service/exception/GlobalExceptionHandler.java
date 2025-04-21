@@ -1,4 +1,4 @@
-package com.event.registration_service.exception;
+package com.event.user_service.exception;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,21 +9,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
-
-/*
- * This class is used to handle the exceptions globally and return the response according to the exception
- * It uses @RestControllerAdvice annotation to handle the exceptions globally
- * It uses @ExceptionHandler annotation to handle the exceptions
- * It uses ResponseEntity to return the exception response
- * This class basically handles the MethodArgumentNotValidException , UserAlreadyExistsException  and all other generic exceptions
- * It returns the response in the form of Map<String, String> where key is the field name and value is the error message
- */
-
-
 @RestControllerAdvice
-public class GlobalHandlerException {
-    
+public class GlobalExceptionHandler {
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String,String>> handleValidationExceptions(MethodArgumentNotValidException ex){
         Map<String,String> errors = new HashMap<>();
@@ -37,8 +25,8 @@ public class GlobalHandlerException {
     }
 
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<Map<String,String>> handleUserAlreadExists(UserAlreadyExistsException ex){
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String,String>> handleUserAlreadExists(UserNotFoundException ex){
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
@@ -48,7 +36,7 @@ public class GlobalHandlerException {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleGenericException(Exception ex) {
         Map<String, String> error = new HashMap<>();
-        error.put("error", "Error occured while registering the user");
+        error.put("error", "Error occured while processing request");
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
