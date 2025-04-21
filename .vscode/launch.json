@@ -9,18 +9,7 @@
             "projectName": "eureka-server",
             "args": "",
             "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=58227 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=eureka-server"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-RegistrationServiceApplication<registration-service>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.event.registration_service.RegistrationServiceApplication",
-            "projectName": "registration-service",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=58168 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=registration-service"
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=64323 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=eureka-server"
         },
         {
             "type": "java",
@@ -30,19 +19,17 @@
             "mainClass": "com.event.gateway_api.GatewayApiApplication",
             "projectName": "gateway-api",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=64166 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=gateway-api"
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
-            "name": "Spring Boot-LoginServiceApplication<login-service>",
+            "name": "Spring Boot-UserServiceApplication<user-service>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.event.login_service.LoginServiceApplication",
-            "projectName": "login-service",
+            "mainClass": "com.event.user_service.UserServiceApplication",
+            "projectName": "user-service",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=55885 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=login-service"
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
@@ -51,16 +38,6 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.event.event_service.EventServiceApplication",
             "projectName": "event-service",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-ImageServiceApplication<image-service>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.event.image_service.ImageServiceApplication",
-            "projectName": "image-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
