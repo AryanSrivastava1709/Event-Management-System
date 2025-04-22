@@ -1,4 +1,4 @@
-package com.event.event_service.config;
+package com.event.booking_service.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,9 +22,15 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/events/all", "/api/events/get/{id}", "/api/events/search").permitAll()
-                        .requestMatchers("/api/events/update/{id}").hasRole("USER")
-                        .requestMatchers("/api/events/add", "/api/events/update/{id}", "/api/events/delete/{id}","/api/events/my-events").hasRole("ADMIN")
+                        .requestMatchers("/api/bookings/add","/api/bookings/delete/{id}","/api/bookings/update/{id}").hasRole("USER")
+                    
+                        .requestMatchers("/api/bookings/all", "api/bookings/all/details","/api/bookings/event/{id}","/api/bookings/confirm/{id}").hasRole("ADMIN")
+
+                        .requestMatchers("/api/bookings/{id}", "/api/bookings/details/{id}").hasAnyRole("USER", "ADMIN")
+
+                        .requestMatchers("/api/bookings/user/{id}").hasRole("USER")
+                
+                
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

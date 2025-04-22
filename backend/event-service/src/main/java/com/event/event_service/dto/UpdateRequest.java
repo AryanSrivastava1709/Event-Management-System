@@ -40,7 +40,6 @@ public class UpdateRequest {
     @Positive(message = "Price must be positive")
     private Double price;
 
-    @Min(value = 50, message = "Available seats must be at least 50")
     private Integer availableSeats;
 
 

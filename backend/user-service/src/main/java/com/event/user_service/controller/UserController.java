@@ -29,8 +29,8 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/email")
-    public ResponseEntity<?> getMethodName(@RequestParam String email) throws Exception {
+    @GetMapping("/email/")
+    public ResponseEntity<?> getUserByEmail(@RequestParam String email) throws Exception {
         if(email == null || email.isEmpty()){
             return new ResponseEntity<>("Email cannot be null or empty", HttpStatus.BAD_REQUEST);
         }
