@@ -26,7 +26,7 @@ public interface BookingService {
 
     ResponseEntity<BookingDto> updateBooking(Long bookingId, int updatedSeats) throws Exception;
 
-    ResponseEntity<BookingDto> confirmBooking(Long bookingId);
+    ResponseEntity<BookingDto> confirmBooking(Long bookingId) throws Exception;
 
     ResponseEntity<?> deleteBooking(Long bookingId) throws Exception;
 

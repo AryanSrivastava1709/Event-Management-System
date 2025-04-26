@@ -74,7 +74,7 @@ public class BookingController {
     }
 
     @PutMapping("/confirm/{id}")
-    public ResponseEntity<?> confirmBooking(@PathVariable Long id) {
+    public ResponseEntity<?> confirmBooking(@PathVariable Long id) throws Exception {
         return bookingService.confirmBooking(id);
     }
 

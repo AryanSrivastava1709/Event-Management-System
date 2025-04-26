@@ -12,11 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.event.booking_service.dto.BookingDetailsDto;
 import com.event.booking_service.dto.BookingDto;
+import com.event.booking_service.dto.EmailRequest;
 import com.event.booking_service.dto.EventDto;
 import com.event.booking_service.dto.UserDto;
 import com.event.booking_service.exception.BookingNotFoundException;
 import com.event.booking_service.exception.InvalidBookingDetailsException;
 import com.event.booking_service.feign.EventInterface;
+import com.event.booking_service.feign.NotificationInterface;
 import com.event.booking_service.feign.UserInterface;
 import com.event.booking_service.mapper.BookingMapper;
 import com.event.booking_service.model.Bookings;
@@ -40,6 +42,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private EventInterface eventInterface;
+
+    @Autowired
+    private NotificationInterface notificationInterface;
 
 
     @Override
@@ -269,8 +274,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public ResponseEntity<BookingDto> confirmBooking(Long bookingId) {
-
+    public ResponseEntity<BookingDto> confirmBooking(Long bookingId) throws Exception {
         try {
             Bookings booking = bookingRepository.findById(bookingId).orElseThrow(()-> new BookingNotFoundException("Booking not found"));
             if (Status.PENDING == booking.getStatus()) {
@@ -279,6 +283,29 @@ public class BookingServiceImpl implements BookingService {
             } else {
                 throw new InvalidBookingDetailsException("Booking is already confirmed or cancelled");
             }
+
+            //sending confirmation email
+            UserDto userDto = userInterface.getUserById(String.valueOf(booking.getUserId()));
+            EventDto eventDto = eventInterface.getEventById((long) booking.getEventId());
+
+            EmailRequest emailRequest = new EmailRequest();
+            emailRequest.setTo(userDto.getEmail());
+            emailRequest.setSubject("Booking Confirmation");
+            
+            Map<String, Object> templateData = new HashMap<>();
+            templateData.put("customerName", userDto.getFullName());
+            templateData.put("bookingId", booking.getId());
+            templateData.put("eventName", eventDto.getEventName());
+            templateData.put("eventDate", eventDto.getDate());
+            templateData.put("eventTime", eventDto.getTime());
+            templateData.put("ticketCount", booking.getSeatsBooked());
+
+            double totalPrice = eventDto.getPrice() * booking.getSeatsBooked();
+            templateData.put("totalAmount", totalPrice);
+            templateData.put("eventLocation", eventDto.getLocation());
+
+            emailRequest.setTemplateData(templateData);
+            notificationInterface.sendEmail(emailRequest);
 
             BookingDto bookingDto = bookingMapper.toDto(booking);
             return new ResponseEntity<>(bookingDto, HttpStatus.OK);
