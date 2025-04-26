@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-wrapper {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .email-header {
+            background-color: #007BFF;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .email-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .email-body {
+            padding: 30px;
+        }
+        .email-body h2 {
+            color: #333333;
+        }
+        .details-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .details-table th, .details-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dddddd;
+            text-align: left;
+        }
+        .email-footer {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #777777;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-header">
+            <h1>Booking Confirmed!</h1>
+        </div>
+        
+        <div class="email-body">
+            <p>Dear <strong th:text="${customerName}">Customer</strong>,</p>
+            <p>Thank you for booking with us. Here are your booking details:</p>
+
+            <table class="details-table">
+                <tr>
+                    <th>Booking ID:</th>
+                    <td th:text="${bookingId}">12345</td>
+                </tr>
+                <tr>
+                    <th>Event:</th>
+                    <td th:text="${eventName}">Event Name</td>
+                </tr>
+                <tr>
+                    <th>Location:</th>
+                    <td th:text="${eventLocation}">Event Location</td>
+                </tr>
+                <tr>
+                    <th>Date:</th>
+                    <td th:text="${eventDate}">January 1, 2025</td>
+                </tr>
+                <tr>
+                    <th>Time:</th>
+                    <td th:text="${eventTime}">7:00 PM</td>
+                </tr>
+                <tr>
+                    <th>Tickets:</th>
+                    <td th:text="${ticketCount}">2</td>
+                </tr>
+                <tr>
+                    <th>Total Amount:</th>
+                    <td th:text="'₹' + ${totalAmount}">₹5000</td>
+                </tr>
+            </table>
+            <p style="margin-top: 30px;">
+                If you have any questions or need assistance, feel free to contact our support team.
+            </p>
+
+            <p>Best Regards,<br><strong>Event Booking Team</strong></p>
+        </div>
+
+        <div class="email-footer">
+            <p>This is an automated email. Please do not reply.</p>
+            <p>&copy; 2025 Event Booking System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
