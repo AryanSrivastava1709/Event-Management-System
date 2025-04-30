@@ -1,7 +1,6 @@
 package com.event.event_service.controller;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.event.event_service.dto.EventRequest;
 import com.event.event_service.dto.UpdateRequest;

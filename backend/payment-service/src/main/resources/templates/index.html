@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .payment-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .card-header {
+            background-color: #0066FF;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="payment-form">
+        <div class="card-header">
+            <h3>Event Booking Payment</h3>
+        </div>
+        <div class="card-body">
+            <form id="paymentForm">
+                <div class="mb-3">
+                    <label for="bookingId" class="form-label">Booking ID</label>
+                    <input type="number" class="form-control" id="bookingId" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userId" class="form-label">User ID</label>
+                    <input type="number" class="form-control" id="userId" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventId" class="form-label">Event ID</label>
+                    <input type="number" class="form-control" id="eventId" required>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount (INR)</label>
+                    <input type="number" class="form-control" id="amount" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="description" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Pay Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const bookingId = document.getElementById('bookingId').value;
+        const userId = document.getElementById('userId').value;
+        const eventId = document.getElementById('eventId').value;
+        const amount = document.getElementById('amount').value;
+        const description = document.getElementById('description').value;
+
+        fetch('/payment-service/api/payments/initiate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                bookingId: bookingId,
+                userId: userId,
+                eventId: eventId,
+                amount: amount,
+                currency: 'INR',
+                description: description
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const options = {
+                key: data.keyId,
+                amount: data.amount,
+                currency: data.currency,
+                name: 'Event Booking System',
+                description: description,
+                order_id: data.orderId,
+                handler: function (response) {
+                    verifyPayment(response, bookingId, userId, eventId, amount, description);
+                },
+                theme: {
+                    color: '#0066FF'
+                }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Something went wrong. Please try again.');
+        });
+    });
+
+    function verifyPayment(response, bookingId, userId, eventId, amount, description) {
+        fetch('/payment-service/api/payments/verify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImFyeWFuc3JpdmFzMTIzQGdtYWlsLmNvbSIsImlhdCI6MTc0NTkzNjY4NiwiZXhwIjoxNzQ2MDIzMDg2fQ.UR9MCaNXTT-7RFbvS_e1l_Vx7PiOQNIEWYfuItijHcT6cIBkKrQAZH32e2OCL7uAyEosYai0ONVW2mzSMF17AQ'
+            },
+            body: JSON.stringify({
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpaySignature: response.razorpay_signature,
+                bookingId: bookingId,
+                userId: userId,
+                eventId: eventId,
+                amount: amount,
+                description: description
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.href = '/payment-service/web/payment-success';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Payment verification failed. Please contact support.');
+        });
+    }
+</script>
+</body>
+</html>

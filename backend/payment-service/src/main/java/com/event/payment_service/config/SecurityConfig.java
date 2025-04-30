@@ -1,4 +1,4 @@
-package com.event.booking_service.config;
+package com.event.payment_service.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,16 +22,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/bookings/add","/api/bookings/delete/{id}","/api/bookings/update/{id}","/api/bookings/confirm/{id}").hasRole("USER")
-                    
-                        .requestMatchers("/api/bookings/all", "api/bookings/all/details","/api/bookings/event/{id}").hasRole("ADMIN")
-
-                        .requestMatchers("/api/bookings/{id}", "/api/bookings/details/{id}").hasAnyRole("USER", "ADMIN")
-
-                        .requestMatchers("/api/bookings/user/{id}").hasRole("USER")
-                
-                
-                        .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
