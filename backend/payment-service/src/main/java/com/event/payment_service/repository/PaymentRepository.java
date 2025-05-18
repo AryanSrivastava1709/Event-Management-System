@@ -2,7 +2,6 @@ package com.event.payment_service.repository;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +15,6 @@ public interface PaymentRepository extends JpaRepository<Payment,Long> {
     Payment findByRazorpayOrderId(String razorpayOrderId);
     
     List<Payment> findByEventId(Long eventId);
-    
-    List<Payment> findByUserIdAndEventId(Long userId, Long eventId);
     
     Optional<Payment> findByBookingId(Long bookingId);
     

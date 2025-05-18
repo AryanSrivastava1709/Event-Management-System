@@ -1,7 +1,6 @@
 package com.event.registration_service.dto;
 
 import com.event.registration_service.model.Role;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

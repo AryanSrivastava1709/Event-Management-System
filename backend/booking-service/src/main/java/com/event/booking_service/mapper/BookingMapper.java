@@ -1,9 +1,7 @@
 package com.event.booking_service.mapper;
 
 import java.math.BigDecimal;
-
 import org.springframework.stereotype.Component;
-
 import com.event.booking_service.dto.BookingDetailsDto;
 import com.event.booking_service.dto.BookingDto;
 import com.event.booking_service.dto.EventDto;

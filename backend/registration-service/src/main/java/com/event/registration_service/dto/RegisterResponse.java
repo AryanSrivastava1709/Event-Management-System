@@ -1,8 +1,6 @@
 package com.event.registration_service.dto;
 
 import com.event.registration_service.model.Role;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

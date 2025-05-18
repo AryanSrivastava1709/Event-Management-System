@@ -1,19 +1,13 @@
 package com.event.event_service.controller;
 
 import org.springframework.web.bind.annotation.RestController;
-
 import com.event.event_service.dto.EventRequest;
 import com.event.event_service.dto.UpdateRequest;
-
 import com.event.event_service.service.EventService;
-
 import jakarta.validation.Valid;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;

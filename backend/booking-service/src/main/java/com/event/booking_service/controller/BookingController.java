@@ -10,14 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.event.booking_service.dto.BookingDto;
-
 import com.event.booking_service.service.BookingService;
-
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 
 @RestController

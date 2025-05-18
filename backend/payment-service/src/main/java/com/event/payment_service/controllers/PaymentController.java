@@ -2,18 +2,16 @@ package com.event.payment_service.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.event.payment_service.dto.PaymentRequest;
 import com.event.payment_service.dto.PaymentVerificationRequest;
 import com.event.payment_service.service.PaymentService;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -39,6 +37,28 @@ public class PaymentController {
     public ResponseEntity<?> getPaymentById(@PathVariable Long id) throws Exception {
         return paymentService.getPaymentById(id);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllPayments() throws Exception {
+        return paymentService.getAllPayments();
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getPaymentByUserId(@PathVariable Long id) throws Exception {
+        return paymentService.getPaymentsByUserId(id);
+    }
+
+    @GetMapping("/event/{id}")
+    public ResponseEntity<?> getPaymentByEventId(@PathVariable Long id) throws Exception {
+        return paymentService.getPaymentsByEventId(id);
+    }
+
+    @GetMapping("/booking/{id}")
+    public ResponseEntity<?> getPaymentByBookingId(@PathVariable Long id) throws Exception {
+        return paymentService.getPaymentByBookingId(id);
+    }
+    
+    
     
     
     

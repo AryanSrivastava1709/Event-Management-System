@@ -2,9 +2,7 @@ package com.event.event_service.service;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
-
 import com.event.event_service.dto.EventRequest;
 import com.event.event_service.dto.EventResponse;
 import com.event.event_service.dto.UpdateRequest;

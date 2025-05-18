@@ -1,9 +1,6 @@
 package com.event.user_service.dto;
 
-
-
 import com.event.user_service.model.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
