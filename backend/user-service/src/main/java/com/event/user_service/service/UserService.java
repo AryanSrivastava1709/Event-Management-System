@@ -1,7 +1,6 @@
 package com.event.user_service.service;
 
 import org.springframework.http.ResponseEntity;
-
 import com.event.user_service.dto.Response;
 
 public interface UserService {

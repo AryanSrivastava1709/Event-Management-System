@@ -1,7 +1,6 @@
 package com.event.notification_service.dto;
 
 import java.util.Map;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

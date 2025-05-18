@@ -3,9 +3,7 @@ package com.event.event_service.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import com.event.event_service.model.Status;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -2,9 +2,7 @@ package com.event.booking_service.service;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
-
 import com.event.booking_service.dto.BookingDetailsDto;
 import com.event.booking_service.dto.BookingDto;
 

@@ -1,14 +1,14 @@
 package com.event.payment_service.service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.event.payment_service.dto.OrderResponse;
 import com.event.payment_service.dto.PaymentRequest;
 import com.event.payment_service.dto.PaymentResponse;
@@ -132,45 +132,91 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public ResponseEntity<List<PaymentResponse>> getAllPayments() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllPayments'");
+    public ResponseEntity<Map<String,List<PaymentResponse>>> getAllPayments() throws Exception {
+        try {
+            
+            List<Payment> payments = paymentRepository.findAll();
+
+            if(payments.isEmpty()){
+                throw new PaymentException("No payments found");
+            }
+
+            List<PaymentResponse> paymentResponses = payments.stream().map(paymentMapper::toPayResponse).toList();
+
+            Map<String, List<PaymentResponse>> paymentResponsesMap = new HashMap<>();
+            paymentResponsesMap.put("payments", paymentResponses);
+
+            return new ResponseEntity<>(paymentResponsesMap, HttpStatus.OK);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    
+
+    @Override
+    public ResponseEntity<Map<String,List<PaymentResponse>>> getPaymentsByUserId(Long userId) throws Exception {
+        try {
+            
+            List<Payment> payments = paymentRepository.findByUserId(userId);
+
+            if(payments.isEmpty()){
+                throw new PaymentException("No payments found");
+            }
+
+            List<PaymentResponse> paymentResponses = payments.stream().map(paymentMapper::toPayResponse).toList();
+
+            Map<String, List<PaymentResponse>> paymentResponsesMap = new HashMap<>();
+            paymentResponsesMap.put("payments", paymentResponses);
+
+            return new ResponseEntity<>(paymentResponsesMap, HttpStatus.OK);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
     @Override
-    public ResponseEntity<List<PaymentResponse>> getPaymentByOrganizerId(Long Id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPaymentByOrganizerId'");
+    public ResponseEntity<Map<String,List<PaymentResponse>>> getPaymentsByEventId(Long eventId) throws Exception {
+        try {
+            
+            List<Payment> payments = paymentRepository.findByEventId(eventId);
+
+            if(payments.isEmpty()){
+                throw new PaymentException("No payments found");
+            }
+
+            List<PaymentResponse> paymentResponses = payments.stream().map(paymentMapper::toPayResponse).toList();
+
+            Map<String, List<PaymentResponse>> paymentResponsesMap = new HashMap<>();
+            paymentResponsesMap.put("payments", paymentResponses);
+
+            return new ResponseEntity<>(paymentResponsesMap, HttpStatus.OK);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
-    @Override
-    public ResponseEntity<List<PaymentResponse>> getPaymentsByUserId(Long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPaymentsByUserId'");
-    }
+   
 
     @Override
-    public ResponseEntity<List<PaymentResponse>> getPaymentsByEventId(Long eventId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPaymentsByEventId'");
+    public ResponseEntity<PaymentResponse> getPaymentByBookingId(Long bookingId) throws Exception {
+        try {
+            
+            Optional<Payment> paymentOptional = paymentRepository.findByBookingId(bookingId);
+        
+            if(paymentOptional.isEmpty()){
+                throw new PaymentException("No payments found");
+            }
+            
+            Payment payment = paymentOptional.get();
+            PaymentResponse paymentResponse = paymentMapper.toPayResponse(payment);
+            return new ResponseEntity<>(paymentResponse, HttpStatus.OK);
+            
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
-    @Override
-    public ResponseEntity<List<PaymentResponse>> getPaymentsByEventIdAndUserId(Long eventId, Long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPaymentsByEventIdAndUserId'");
-    }
-
-    @Override
-    public ResponseEntity<List<PaymentResponse>> getPaymentByBookingId(Long bookingId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPaymentByBookingId'");
-    }
-
-    @Override
-    public ResponseEntity<List<PaymentResponse>> getPaymentByStatus(String status) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPaymentByStatus'");
-    }
+    
     
 }

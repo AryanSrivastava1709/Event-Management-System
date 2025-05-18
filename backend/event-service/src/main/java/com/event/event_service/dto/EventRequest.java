@@ -2,9 +2,7 @@ package com.event.event_service.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import org.springframework.web.multipart.MultipartFile;
-
 import com.event.event_service.model.Status;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
