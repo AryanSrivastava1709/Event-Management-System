@@ -1,0 +1,38 @@
+<header class="bg-rose-600 text-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 py-4">
+    <div class="flex justify-between items-center">
+      <!-- Logo -->
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-wide">🎉 Eventify</h1>
+
+      <!-- Hamburger Button (Visible on small screens) -->
+      <button
+        class="sm:hidden text-white focus:outline-none text-2xl"
+        (click)="toggleMenu()"
+        aria-label="Toggle navigation menu"
+      >
+        <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+      </button>
+
+      <!-- Navigation (Desktop) -->
+      <nav class="hidden sm:flex">
+        <ul class="flex space-x-6 text-base font-medium">
+          <li><a routerLink="/" class="hover:text-gray-100 transition">Home</a></li>
+          <li><a routerLink="/events" class="hover:text-gray-100 transition">Events</a></li>
+          <li><a routerLink="/about" class="hover:text-gray-100 transition">About</a></li>
+          <li><a routerLink="/contact" class="hover:text-gray-100 transition">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      *ngIf="isMenuOpen"
+      class="sm:hidden mt-4 border-t border-white/20 pt-4 space-y-2 text-center text-base"
+    >
+      <a routerLink="/" class="block hover:text-gray-100">Home</a>
+      <a routerLink="/events" class="block hover:text-gray-100">Events</a>
+      <a routerLink="/about" class="block hover:text-gray-100">About</a>
+      <a routerLink="/contact" class="block hover:text-gray-100">Contact</a>
+    </div>
+  </div>
+</header>
