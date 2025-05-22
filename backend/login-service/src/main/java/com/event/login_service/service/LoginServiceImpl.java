@@ -57,6 +57,7 @@ public class LoginServiceImpl implements LoginService {
             String jwt = jwtUtils.generateToken(user.getEmail(), user.getRole().toString());
 
              LoginResponse loginResponse = new LoginResponse();
+                loginResponse.setUserId(String.valueOf(user.getId()));
                 loginResponse.setFullName(user.getFullName());
                 loginResponse.setEmail(user.getEmail());
                 loginResponse.setMobile(user.getMobile());

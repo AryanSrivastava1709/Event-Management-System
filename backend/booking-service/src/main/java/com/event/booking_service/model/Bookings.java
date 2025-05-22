@@ -1,5 +1,6 @@
 package com.event.booking_service.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import jakarta.persistence.Entity;
@@ -30,4 +31,6 @@ public class Bookings {
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    private BigDecimal totalAmount;
 }

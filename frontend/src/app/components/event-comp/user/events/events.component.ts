@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Events } from '../../model/events';
-import { EventServiceService } from '../../services/event-service.service';
+import { Events } from '../../../../model/events';
+import { EventServiceService } from '../../../../services/event/event-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })

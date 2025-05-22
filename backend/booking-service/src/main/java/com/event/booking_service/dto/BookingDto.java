@@ -1,6 +1,7 @@
 package com.event.booking_service.dto;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import com.event.booking_service.model.Status;
@@ -29,4 +30,5 @@ public class BookingDto {
     private LocalDate bookingDate;
     private LocalTime bookingTime;
     private Status status;
+    private BigDecimal totalAmount;
 }
