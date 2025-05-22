@@ -1,21 +1,29 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Events } from '../../model/events';
 import { EventServiceService } from '../../services/event-service.service';
-import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-events',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
 export class EventsComponent {
-
-  events:Events[] = [];
-  loading=true;
+  events: Events[] = [];
+  loading = true;
   error = false;
 
-  constructor(private eventService:EventServiceService) {};
+  // Pagination
+  page: number = 1;
+  pageSize: number = 8;
+
+  constructor(
+    private eventService: EventServiceService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.fetchEvents();
@@ -31,6 +39,7 @@ export class EventsComponent {
         this.loading = false;
       },
       error: (error) => {
+        this.toastr.error(error.error?.error || 'Failed to fetch events');
         console.error('Error fetching events:', error);
         this.error = true;
         this.loading = false;
@@ -38,4 +47,23 @@ export class EventsComponent {
     });
   }
 
+  get paginatedEvents(): Events[] {
+    const start = (this.page - 1) * this.pageSize;
+    return this.events.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.events.length / this.pageSize);
+  }
+
+  get pages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  goToPage(pageNum: number): void {
+    if (pageNum >= 1 && pageNum <= this.totalPages) {
+      this.page = pageNum;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 }
