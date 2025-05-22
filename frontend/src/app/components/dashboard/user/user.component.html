@@ -1,0 +1,175 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-rose-100 font-body">
+  <!-- Welcome Section -->
+  <section class="bg-rose-600 text-white py-16 px-6 sm:px-12 text-center">
+    <h2 class="text-4xl sm:text-5xl font-extrabold mb-2">Welcome Back,</h2>
+    <p class="text-2xl sm:text-3xl font-semibold mb-2">{{ fullName }}</p>
+    <p class="text-white/80 text-sm sm:text-base">
+      Here's what's happening around you!
+    </p>
+  </section>
+
+  <!-- Upcoming Events Preview -->
+  <section class="py-16 px-6 sm:px-12">
+    <div
+      class="flex justify-between items-center mb-10 flex-col sm:flex-row gap-4"
+    >
+      <h3
+        class="text-3xl sm:text-4xl font-bold text-gray-800 text-center sm:text-left"
+      >
+        Upcoming Events
+      </h3>
+      <a
+        routerLink="/events"
+        class="text-rose-600 font-medium hover:underline text-sm sm:text-base"
+      >
+        View All Events →
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      @for (event of events.slice(0, 4); track event.id) {
+      <div class="relative">
+        <!-- Back layer for cuboid effect -->
+        <div
+          class="absolute -top-1.5 -left-1.5 w-full h-full border-t-8 border-l-8 border-rose-600 z-0"
+        ></div>
+
+        <!-- Main card -->
+        <div
+          class="relative bg-white border-[3px] border-rose-600 overflow-hidden z-10 hover:transform hover:shadow-2xl transition duration-300"
+        >
+          <div class="w-full aspect-[16/10] bg-gray-100">
+            <img
+              [src]="event.imageUrl"
+              alt="Event Image"
+              class="w-full h-full object-cover border-b-2 border-rose-600"
+            />
+          </div>
+          <div class="p-5 space-y-1">
+            <h4 class="text-lg font-semibold text-gray-800 truncate">
+              {{ event.eventName }}
+            </h4>
+            <p class="text-sm text-gray-600">
+              Hosted by {{ event.organizerName || "Event Corp" }}
+            </p>
+            <p class="text-sm text-gray-600">
+              Join us on {{ event.fullDateTime | date : "dd MMM yyyy" }} at
+              {{ event.fullDateTime | date : "hh:mm a" }}
+            </p>
+            <p class="text-sm text-gray-600">Location: {{ event.location }}</p>
+          </div>
+        </div>
+      </div>
+
+      }
+    </div>
+  </section>
+
+  <!-- Promotional Section -->
+  <section class="mt-20 bg-white py-20 px-6 sm:px-12 text-center">
+    <h3 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-6 font-header">
+      Experience the Best Moments With Us!
+    </h3>
+    <p class="text-gray-600 max-w-2xl mx-auto mb-12 text-base sm:text-lg">
+      From music festivals to corporate meetups, our platform brings you the
+      most exciting events right at your fingertips. Stay tuned and don’t miss
+      out!
+    </p>
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card 1 - Workshop -->
+      <div class="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg group">
+        <img src="workshop-event.jpg" alt="Workshop" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
+          <span class="text-white text-2xl sm:text-3xl font-header font-semibold">Workshops</span>
+        </div>
+      </div>
+  
+      <!-- Card 2 - Concerts -->
+      <div class="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg group">
+        <img src="concert-event.jpg" alt="Concert" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
+          <span class="text-white text-2xl sm:text-3xl font-header font-semibold">Concerts</span>
+        </div>
+      </div>
+  
+      <!-- Card 3 - Public Parties -->
+      <div class="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-lg group">
+        <img src="private-events.jpg" alt="Public Parties" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
+          <span class="text-white text-2xl sm:text-3xl font-header font-semibold">Public Parties</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Why Choose Us Section -->
+<section class="mt-20 px-6 sm:px-12 py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto text-center">
+      <h3 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-14 font-header">
+        Why Choose Us?
+      </h3>
+  
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Card 1 -->
+        <div
+          class="relative bg-white p-6 pt-16 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 group overflow-hidden"
+        >
+          <div class="absolute top-0 left-0 w-full h-[6px] bg-rose-600"></div>
+          <div
+            class="absolute -top-6 left-6 bg-rose-100 text-rose-600 rounded-full p-3 shadow-md group-hover:scale-105 transition"
+          >
+          </div>
+          <h4 class="text-lg font-semibold text-rose-600 mb-2 font-header">
+            Verified Organizers
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Every event is backed by real, trustworthy professionals to ensure a
+            smooth and memorable experience.
+          </p>
+        </div>
+  
+        <!-- Card 2 -->
+        <div
+          class="relative bg-white p-6 pt-16 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 group overflow-hidden"
+        >
+          <div class="absolute top-0 left-0 w-full h-[6px] bg-rose-600"></div>
+          <div
+            class="absolute -top-6 left-6 bg-rose-100 text-rose-600 rounded-full p-3 shadow-md group-hover:scale-105 transition"
+          >
+          </div>
+          <h4 class="text-lg font-semibold text-rose-600 mb-2 font-header">
+            Secure Booking
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            We partner with reliable payment providers for seamless and secure
+            transactions every time.
+          </p>
+        </div>
+  
+        <!-- Card 3 -->
+        <div
+          class="relative bg-white p-6 pt-16 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 group overflow-hidden"
+        >
+          <div class="absolute top-0 left-0 w-full h-[6px] bg-rose-600"></div>
+          <div
+            class="absolute -top-6 left-6 bg-rose-100 text-rose-600 rounded-full p-3 shadow-md group-hover:scale-105 transition"
+          >
+          </div>
+          <h4 class="text-lg font-semibold text-rose-600 mb-2 font-header">
+            24/7 Support
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Our friendly team is available anytime you need help — before,
+            during, or after your event.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Footer Spacer -->
+  <div class="h-32 sm:h-48"></div>
+</div>
