@@ -1,5 +1,6 @@
 package com.event.booking_service.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -88,6 +89,12 @@ public class BookingServiceImpl implements BookingService {
         bookingDto.setBookingTime(LocalTime.now());
         bookingDto.setBookingDate(LocalDate.now());
         bookingDto.setStatus(Status.PENDING);
+        if (eventDto.getPrice() != null) {
+            BigDecimal totalAmount = BigDecimal.valueOf(eventDto.getPrice())
+                .multiply(BigDecimal.valueOf(bookingDto.getSeatsBooked()));
+            bookingDto.setTotalAmount(totalAmount);
+        }
+        
 
         // 7. Save booking
         Bookings booking = bookingMapper.toEntity(bookingDto);
@@ -95,9 +102,12 @@ public class BookingServiceImpl implements BookingService {
 
         // 8. Update event with new status and seat count
         eventInterface.updateEvent(eventDto.getId().longValue(), eventDto);
+         // 9. Convert back to DTO and return
+        BookingDto savedDto = bookingMapper.toDto(booking);
+        savedDto.setTotalAmount(bookingDto.getTotalAmount());
 
         // 9. Return response
-        return new ResponseEntity<>(bookingMapper.toDto(booking), HttpStatus.CREATED);
+        return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
     }
 
 
@@ -108,6 +118,7 @@ public class BookingServiceImpl implements BookingService {
             Bookings bookings = bookingRepository.findById(bookingId).orElseThrow(()-> new BookingNotFoundException("Booking not found"));
 
             BookingDto bookingDto = bookingMapper.toDto(bookings);
+            bookingDto.setTotalAmount(bookings.getTotalAmount());
             return new ResponseEntity<>(bookingDto, HttpStatus.OK);
         } catch (Exception ex) {
             throw ex;

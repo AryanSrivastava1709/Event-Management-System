@@ -1,27 +1,42 @@
 import { Routes } from '@angular/router';
-import { EventsComponent } from './components/events/events.component';
+import { EventsComponent } from './components/event-comp/user/events/events.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AdminComponent } from './components/dashboard/admin/admin.component';
 import { UserComponent } from './components/dashboard/user/user.component';
 import { AuthGuard } from './guards/auth-guard.guard';
+import { EventDetailComponent } from './components/event-comp/user/event-detail/event-detail.component';
+import { AdminEventsComponent } from './components/event-comp/admin/admin-events/admin-events.component';
+import { BookingComponent } from './components/booking/booking.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/events', pathMatch: 'full' },
-    { path: 'register', component: RegistrationComponent },
-    { path: 'login', component: LoginComponent },
-    { 
-        path: 'admin/dashboard', 
-        component: AdminComponent, 
-        canActivate: [AuthGuard],
-        data: { roles: ['ADMIN'] }
-      },
-      { 
-        path: 'user/dashboard', 
-        component: UserComponent, 
-        canActivate: [AuthGuard]
-      },
-      { path: 'events', component: EventsComponent },
-    {path:'**', component:PageNotFoundComponent}
+  {
+    path: 'admin/dashboard',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] },
+  },
+  {
+    path: 'user/dashboard',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: '', redirectTo: '/events', pathMatch: 'full' },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'admin/events',
+    component: AdminEventsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] },
+  },
+  { path: 'events', component: EventsComponent },
+  {
+    path: 'event/:id',
+    component: EventDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'bookings', component: BookingComponent, canActivate: [AuthGuard] },
+  { path: '**', component: PageNotFoundComponent },
 ];

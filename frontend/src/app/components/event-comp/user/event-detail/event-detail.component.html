@@ -1,0 +1,107 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-rose-100 px-4 py-10 font-body">
+  <div class="max-w-6xl mx-auto bg-white rounded-[2rem] shadow-xl border-2 border-rose-600 relative overflow-hidden">
+    
+    <!-- Ticket Perforated Side -->
+    <div class="absolute top-1/2 left-0 -translate-y-1/2 w-5 h-10 bg-rose-200 rounded-r-full z-10"></div>
+    <div class="absolute top-1/2 right-0 -translate-y-1/2 w-5 h-10 bg-rose-200 rounded-l-full z-10"></div>
+
+    <!-- Banner -->
+    <div class="h-[34.6rem] w-full overflow-hidden rounded-t-[2rem]">
+      <img [src]="event.imageUrl" [alt]="event.eventName" class="w-full h-full object-cover object-center">
+    </div>
+
+    <!-- Details Section -->
+    <div class="relative p-8 md:p-10 space-y-6 border-t-2 border-dashed border-black">
+      
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 font-header tracking-tight">
+            {{ event.eventName }}
+          </h1>
+          <p class="text-gray-600 text-base italic">
+            Organized by <span class="font-semibold">{{ event.organizerName }}</span>
+          </p>
+        </div>
+        <span class="text-sm font-semibold px-3 py-1 rounded-full capitalize w-fit"
+              [ngClass]="{
+                'bg-green-100 text-green-700': event.status === 'ACTIVE',
+                'bg-yellow-100 text-yellow-700': event.status === 'INACTIVE',
+                'bg-red-100 text-red-700': event.status === 'CANCELLED'
+              }">
+          {{ event.status }}
+        </span>
+      </div>
+
+      <!-- Description -->
+      <p class="text-gray-700 text-base leading-relaxed">{{ event.description }}</p>
+
+      <!-- Event Info -->
+      <div class="border-t border-gray-200 pt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-sm text-gray-800">
+        <!-- Date & Time -->
+        <div class="flex items-start gap-3">
+          <span class="text-xl">📅</span>
+          <div>
+            <h4 class="font-semibold text-gray-600 mb-1">Date & Time</h4>
+            <p>{{ event.fullDateTime | date: 'fullDate' }}</p>
+            <p>{{ event.fullDateTime | date: 'hh:mm a' }}</p>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="flex items-start gap-3">
+          <span class="text-xl">📍</span>
+          <div>
+            <h4 class="font-semibold text-gray-600 mb-1">Location</h4>
+            <p>{{ event.location }}</p>
+          </div>
+        </div>
+
+        <!-- Price + Seats Available -->
+        <div class="flex items-start gap-3">
+          <span class="text-xl">🎟️</span>
+          <div>
+            <h4 class="font-semibold text-gray-600 mb-1">Tickets</h4>
+            <div class="flex items-center justify-between gap-3">
+              <p class="text-xl font-bold text-rose-600">₹{{ event.price }}</p>
+              <p class="text-blue-600 font-medium">
+                {{ event.availableSeats }} seat{{ event.availableSeats > 1 ? 's' : '' }} left
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seat Selection -->
+      <div class="pt-6">
+        <label class="block text-gray-700 font-medium mb-2">🎫 Select Number of Tickets</label>
+        <div class="flex items-center gap-4 w-fit border border-gray-300 rounded-full px-4 py-2 bg-gray-50 shadow-sm">
+          <button (click)="decrementSeats()"
+                  class="text-2xl font-bold text-red-600 hover:text-red-700 transition">
+            −
+          </button>
+          <input type="number" [(ngModel)]="seatsBooked" min="1"
+                 class="w-12 text-center text-lg font-semibold bg-transparent outline-none border-0" />
+          <button (click)="incrementSeats()"
+                  class="text-2xl font-bold text-green-600 hover:text-green-700 transition">
+            +
+          </button>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="pt-8">
+        <button (click)="handleBookNow()" class="cursor-pointer w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl text-lg transition-all shadow-md hover:shadow-lg font-header">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  @if (loading) {
+    <div class="fixed inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-50">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-red-600 border-opacity-50"></div>
+    </div>
+  }
+</div>

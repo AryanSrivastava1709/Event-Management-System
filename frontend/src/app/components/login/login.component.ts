@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthServiceService } from '../../services/auth-service.service';
+import { AuthServiceService } from '../../services/auth/auth-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -61,6 +61,7 @@ export class LoginComponent {
     this.authService.login(data).subscribe({
       next: (data) => {
         this.toastr.success('Logged in successfully!', 'Success');
+        localStorage.setItem('userId', data.userId);
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
         localStorage.setItem('email', data.email);

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterRequest, RegisterResponse } from '../model/register';
+import { RegisterRequest, RegisterResponse } from '../../model/register';
 import { Observable } from 'rxjs';
-import { LoginRequest, LoginResponse } from '../model/login';
+import { LoginRequest, LoginResponse } from '../../model/login';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,7 @@ export class AuthServiceService {
   }
 
   logout(): void {
+    localStorage.removeItem('userId');
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('email');
@@ -55,8 +56,9 @@ export class AuthServiceService {
     const role = localStorage.getItem('role');
     const fullName = localStorage.getItem('fullName');
     const mobile = localStorage.getItem('mobile');
+    const userId = localStorage.getItem('userId');
     
-    if (!token || !email || !role || !fullName || !mobile) {
+    if (!token || !email || !role || !fullName || !mobile || !userId) {
       return null;
     }
     
@@ -65,7 +67,8 @@ export class AuthServiceService {
       email,
       role,
       fullName,
-      mobile
+      mobile,
+      userId
     };
   }
 }

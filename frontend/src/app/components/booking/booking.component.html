@@ -1,0 +1,136 @@
+<div
+  class="min-h-screen bg-gradient-to-br from-gray-50 to-rose-100 px-4 py-10 font-body"
+>
+  <h1
+    class="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-800 font-header"
+  >
+    My Bookings
+  </h1>
+
+  <!-- Spinner -->
+  @if (loading) {
+  <div class="flex justify-center items-center min-h-[300px]">
+    <div
+      class="animate-spin rounded-full h-16 w-16 border-t-4 border-rose-600 border-opacity-50"
+    ></div>
+  </div>
+  }
+
+  <!-- Booking Cards -->
+  @if (!loading && bookings.length > 0) {
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    @for (booking of bookings; track booking.id) {
+    <div
+      class="bg-white shadow-md border-2 border-rose-200 rounded-2xl p-6 space-y-4 relative overflow-hidden"
+    >
+      <!-- Status Badge -->
+      <span
+        class="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide"
+        [ngClass]="{
+          'bg-green-100 text-green-700': booking.status === 'CONFIRMED',
+          'bg-yellow-100 text-yellow-700': booking.status === 'PENDING',
+          'bg-red-100 text-red-700': booking.status === 'CANCELLED'
+        }"
+      >
+        {{ booking.status }}
+      </span>
+
+      <!-- Booking Info -->
+      <div class="space-y-2">
+        <div
+          class="text-lg font-semibold text-gray-900 flex items-center gap-2"
+        >
+          🎟️ Booking ID:
+          <span class="text-rose-600 font-bold">#{{ booking.id }}</span>
+        </div>
+
+        <div class="text-gray-700 text-sm">
+          <span class="font-medium">📅 Date:</span>
+          {{ booking.fullDateTime | date : "fullDate" }}
+        </div>
+
+        <div class="text-gray-700 text-sm">
+          <span class="font-medium">⏰ Time:</span>
+          {{ booking.fullDateTime | date : "hh:mm a" }}
+        </div>
+
+        <div class="text-gray-700 text-sm">
+          <span class="font-medium">🎫 Seats Booked: </span>
+          <span class="text-rose-600 font-semibold">{{
+            booking.seatsBooked
+          }}</span>
+        </div>
+
+        <div class="text-gray-700 text-sm">
+          <span class="font-medium">🆔 Event ID:</span>
+          {{ booking.eventId }}
+        </div>
+
+        <!-- Total Amount -->
+        <div class="text-gray-700 text-sm">
+          <span class="font-medium">💰 Total Amount: </span>
+          <span class="text-rose-600 font-semibold"
+            >₹{{ booking.totalAmount }}</span
+          >
+        </div>
+      </div>
+      <!-- Pay Now Button for Pending Bookings -->
+      @if (booking.status === 'PENDING') {
+      <div>
+        <button
+          class="cursor-pointer mt-3 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2 px-4 rounded-xl w-full transition duration-200 flex items-center justify-center gap-2"
+          [disabled]="payingBookingId === booking.id"
+          (click)="payNow(booking)"
+        >
+          @if (payingBookingId === booking.id) {
+          <svg
+            class="animate-spin h-5 w-5 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+            ></path>
+          </svg>
+          Processing... } @else { 💳 Pay Now }
+        </button>
+      </div>
+      }@else {
+      <div class="flex flex-col gap-4 md:flex-row">
+        <button
+          class="cursor-pointer mt-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl w-full transition duration-200 flex items-center justify-center gap-2"
+          [disabled]="payingBookingId === booking.id"
+          (click)="payNow(booking)"
+        >
+          Edit Booking
+        </button>
+        <button
+          class="cursor-pointer mt-3 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2 px-4 rounded-xl w-full transition duration-200 flex items-center justify-center gap-2"
+          [disabled]="payingBookingId === booking.id"
+          (click)="handleCancelBooking(booking.id)"
+        >
+          Cancel Booking
+        </button>
+      </div>
+      }
+    </div>
+
+    }
+  </div>
+  }
+
+  <!-- No Bookings -->
+  @if (!loading && bookings.length === 0) {
+  <div class="text-center text-gray-600 mt-10">You have no bookings yet.</div>
+  }
+</div>

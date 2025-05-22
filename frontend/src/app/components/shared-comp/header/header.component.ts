@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthServiceService } from '../../services/auth-service.service';
+import { AuthServiceService } from '../../../services/auth/auth-service.service';
 
 @Component({
   selector: 'app-header',

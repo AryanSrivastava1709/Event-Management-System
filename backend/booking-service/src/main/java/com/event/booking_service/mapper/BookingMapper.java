@@ -21,6 +21,7 @@ public class BookingMapper {
         bookingDto.setBookingTime(bookings.getBookingTime());
         bookingDto.setBookingDate(bookings.getBookingDate());
         bookingDto.setStatus(bookings.getStatus());
+        bookingDto.setTotalAmount(bookings.getTotalAmount());
         return bookingDto;
     }
 
@@ -32,6 +33,7 @@ public class BookingMapper {
         bookings.setBookingTime(bookingDto.getBookingTime());
         bookings.setBookingDate(bookingDto.getBookingDate());
         bookings.setStatus(bookingDto.getStatus());
+        bookings.setTotalAmount(bookingDto.getTotalAmount());
         return bookings;
     }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthServiceService } from '../../../services/auth-service.service';
+import { AuthServiceService } from '../../../services/auth/auth-service.service';
 import { Events } from '../../../model/events';
-import { EventServiceService } from '../../../services/event-service.service';
+import { EventServiceService } from '../../../services/event/event-service.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
