@@ -35,7 +35,7 @@ public class EventServiceImpl implements EventService {
         String imageUrl = null;
 
         if(eventRequest.getImage() != null && !eventRequest.getImage().isEmpty()){
-            ResponseEntity<?> response = imageInterface.uploadImage(eventRequest.getImage());
+            ResponseEntity<Object> response = imageInterface.uploadImage(eventRequest.getImage());
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 Map<String,String> responseBody = (Map<String, String>) response.getBody();
