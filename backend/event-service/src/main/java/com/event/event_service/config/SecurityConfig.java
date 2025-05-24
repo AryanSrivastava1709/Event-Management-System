@@ -23,8 +23,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/events/all", "/api/events/get/{id}", "/api/events/search").permitAll()
-                        .requestMatchers("/api/events/update/{id}").hasRole("USER")
-                        .requestMatchers("/api/events/add", "/api/events/update/{id}", "/api/events/delete/{id}").hasRole("ADMIN")
+                        .requestMatchers("/api/events/update/{id}").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/events/add", "/api/events/delete/{id}").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

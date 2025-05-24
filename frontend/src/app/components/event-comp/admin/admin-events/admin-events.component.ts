@@ -3,7 +3,7 @@ import { Events } from '../../../../model/events';
 import { EventServiceService } from '../../../../services/event/event-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-events',
@@ -14,8 +14,8 @@ import { RouterLink } from '@angular/router';
 export class AdminEventsComponent {
 
   events: Events[] = [];
-    loading = true;
-    error = false;
+  loading = true;
+  error = false;
   
     // Pagination
     page: number = 1;
@@ -23,13 +23,35 @@ export class AdminEventsComponent {
   
     constructor(
       private eventService: EventServiceService,
-      private toastr: ToastrService
+      private toastr: ToastrService,
+      private router: Router
     ) {}
 
     ngOnInit(): void {
       this.fetchEvents();
     }
-  
+
+
+    handleCancelEvent(eventId: number): void {
+
+      this.loading = true;
+      this.eventService.deleteEvent(eventId).subscribe({
+        next:()=>{
+          this.toastr.success('Event cancelled', 'Success');
+          this.events = this.events.filter(event => event.id !== eventId);
+          this.loading = false;
+        },
+        error: (err) =>{
+          this.toastr.error('Unable to cancel the event', 'Error');
+          this.loading = false;
+        }
+      })
+    }
+
+    handleGetBooking(eventId:number){
+      this.router.navigate(['/admin/event', eventId]);
+    }
+
     fetchEvents(): void {
       this.eventService.getAdminEvents().subscribe({
         next: (data) => {
@@ -38,7 +60,6 @@ export class AdminEventsComponent {
             fullDateTime: new Date(`${event.date}T${event.time}`)
           }));
           this.loading = false;
-          console.log('Fetched events:', this.events);
         },
         error: (error) => {
           this.toastr.error(error.error?.error || 'Failed to fetch events');

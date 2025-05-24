@@ -110,7 +110,7 @@
         <button
           class="cursor-pointer mt-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl w-full transition duration-200 flex items-center justify-center gap-2"
           [disabled]="payingBookingId === booking.id"
-          (click)="payNow(booking)"
+          (click)="handleToggle(booking.seatsBooked)"
         >
           Edit Booking
         </button>
@@ -122,11 +122,63 @@
           Cancel Booking
         </button>
       </div>
-      }
+
+      <!-- Update Booking Modal -->
+      @if(toggle){
+        <div class="pt-6 relative z-0 max-w-md mx-auto">
+          <label class="block text-gray-800 text-lg font-semibold mb-3">
+            🎫 Select Number of Tickets <span class="text-red-500">*</span>
+          </label>
+        
+          <div
+            class="flex items-center justify-between gap-3 border border-gray-300 rounded-full px-5 py-2.5 bg-white shadow-md"
+          >
+            <button
+              type="button"
+              (click)="decrementSeats()"
+              class="text-3xl font-bold text-rose-600 hover:text-rose-700 transition-transform transform hover:scale-110"
+              aria-label="Decrease"
+            >
+              −
+            </button>
+        
+            <input
+              [(ngModel)]="updateSeats"
+              min="1"
+              readonly
+              class="w-16 text-center text-xl font-medium text-gray-700 bg-transparent outline-none"
+            />
+        
+            <button
+              type="button"
+              (click)="incrementSeats(booking)"
+              class="text-3xl font-bold text-emerald-600 hover:text-emerald-700 transition-transform transform hover:scale-110"
+              aria-label="Increase"
+            >
+              +
+            </button>
+        
+            <button
+            (click)="handleUpdateBooking(booking.id)"
+              type="button"
+              class="ml-4 px-4 py-1.5 rounded-full bg-rose-600 text-white text-sm font-semibold shadow hover:bg-rose-700 transition-all cursor-pointer"
+            >
+              Update
+            </button>
+          </div>
+        
+          <p class="text-sm text-red-500 mt-2 italic">
+            *You can only increase the number of seats up to the amount you've already booked.
+          </p>
+        </div>
+        
+
+      } }
     </div>
 
     }
   </div>
+
   }
 
   <!-- No Bookings -->

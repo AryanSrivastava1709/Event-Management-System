@@ -48,7 +48,7 @@ export class EventDetailComponent {
       next:()=>{
         setTimeout(()=>{
           this.toastr.success('Booking successful');
-          this.router.navigate(['/events']);
+          this.router.navigate(['/bookings']);
           this.loading = false;
         },2000)
       },

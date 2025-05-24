@@ -273,6 +273,13 @@ public class BookingServiceImpl implements BookingService {
                 eventInterface.updateEvent(eventDto.getId().longValue(), eventDto);
 
                 existingBooking.setSeatsBooked(updatedSeats);
+                //update the totalAmount
+
+                if (eventDto.getPrice() != null) {
+                    BigDecimal totalAmount = BigDecimal.valueOf(eventDto.getPrice())
+                        .multiply(BigDecimal.valueOf(updatedSeats));
+                        existingBooking.setTotalAmount(totalAmount);
+                }
                 bookingRepository.save(existingBooking);
                 BookingDto updatedBookingDto = bookingMapper.toDto(existingBooking);
                 return new ResponseEntity<>(updatedBookingDto, HttpStatus.OK);
