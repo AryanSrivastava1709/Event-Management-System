@@ -1,120 +1,133 @@
 <div class="min-h-screen bg-gray-100 px-4 py-10 font-body bg-gradient-to-br from-gray-50 to-rose-100">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl font-extrabold text-red-700 mb-10 border-b-2 border-red-300 pb-4 tracking-tight">
-        My Events
-      </h2>
-  
-      <!-- Loading -->
-      @if (loading) {
-        <div class="text-center text-gray-700 py-10 text-lg italic animate-pulse">
-          Fetching latest events...
-        </div>
-      }
-  
-      <!-- Error -->
-      @if (error) {
-        <div class="text-center text-red-600 py-10 text-lg font-semibold">
-          Something went wrong. Please try again later.
-        </div>
-      }
-  
-      <!-- No Events -->
-      @if (!loading && !error && events.length === 0) {
-        <div class="text-center text-gray-500 py-10 text-lg">
-          No events available right now. Check back soon!
-        </div>
-      }
-  
-      <!-- Event Cards -->
-      @if (paginatedEvents.length > 0) {
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          @for (event of paginatedEvents; track event.id) {
-            <div class="bg-white rounded-2xl shadow hover:shadow-xl transition-all border border-gray-200 flex flex-col overflow-hidden">
-              <!-- Image -->
-              <div class="border-b border-gray-200">
-                <img [src]="event.imageUrl"
-                     alt="Event Image"
-                     class="w-full h-56 object-cover border border-gray-100 rounded-t-2xl">
-              </div>
-  
-              <!-- Content -->
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between gap-2">
-                    <h3 class="text-lg font-bold text-gray-900 truncate">{{ event.eventName }}</h3>
-                    <span class="text-xs font-semibold px-2 py-1 rounded-full capitalize"
-                          [ngClass]="{
-                            'bg-green-100 text-green-700': event.status === 'ACTIVE',
-                            'bg-yellow-100 text-yellow-700': event.status === 'INACTIVE',
-                            'bg-red-100 text-red-700': event.status === 'CANCELLED'
-                          }">
-                      {{ event.status }}
-                    </span>
-                  </div>
-  
-                  <p class="text-sm text-gray-600 line-clamp-2">
-                    {{ event.description }}
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-red-700 mb-10 border-b-2 border-red-300 pb-4 tracking-tight">
+      My Events
+    </h2>
+
+    <!-- Loading -->
+    @if (loading) {
+      <div class="text-center text-gray-700 py-10 text-lg italic animate-pulse">
+        Fetching latest events...
+      </div>
+    }
+
+    <!-- Error -->
+    @if (error) {
+      <div class="text-center text-red-600 py-10 text-lg font-semibold">
+        Something went wrong. Please try again later.
+      </div>
+    }
+
+    <!-- No Events -->
+    @if (!loading && !error && events.length === 0) {
+      <div class="text-center text-gray-500 py-10 text-lg">
+        No events available right now. Check back soon!
+      </div>
+    }
+
+    <!-- Event Cards -->
+    @if (paginatedEvents.length > 0) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @for (event of paginatedEvents; track event.id) {
+          <div class="bg-white rounded-2xl shadow hover:shadow-xl transition-all border border-gray-200 flex flex-col overflow-hidden">
+            <!-- Image -->
+            <div class="border-b border-gray-200">
+              <img [src]="event.imageUrl"
+                   alt="Event Image"
+                   class="w-full h-56 object-cover border border-gray-100 rounded-t-2xl">
+            </div>
+
+            <!-- Content -->
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <h3 class="text-lg font-bold text-gray-900 truncate">{{ event.eventName }}</h3>
+                  <span class="text-xs font-semibold px-2 py-1 rounded-full capitalize"
+                        [ngClass]="{
+                          'bg-green-100 text-green-700': event.status === 'ACTIVE',
+                          'bg-yellow-100 text-yellow-700': event.status === 'INACTIVE',
+                          'bg-red-100 text-red-700': event.status === 'CANCELLED'
+                        }">
+                    {{ event.status }}
+                  </span>
+                </div>
+
+                <p class="text-sm text-gray-600 line-clamp-2">
+                  {{ event.description }}
+                </p>
+
+                <div class="text-sm text-gray-700 space-y-1 pt-2">
+                  <p>
+                    <strong>Date:</strong>
+                    {{ event.fullDateTime | date: 'dd MMM yyyy' }}
+                    <span class="ml-2">| {{ event.fullDateTime | date: 'hh:mm a' }}</span>
                   </p>
-  
-                  <div class="text-sm text-gray-700 space-y-1 pt-2">
-                    <p>
-                      <strong>Date:</strong>
-                      {{ event.fullDateTime | date: 'dd MMM yyyy' }}
-                      <span class="ml-2">| {{ event.fullDateTime | date: 'hh:mm a' }}</span>
-                    </p>
-                    <p><strong>Location:</strong> {{ event.location }}</p>
-                    <p><strong>Organizer:</strong> {{ event.organizerName }}</p>
-                    <p class="flex justify-between items-center">
-                      <span><strong>Price:</strong> ₹{{ event.price }}</span>
-                      <span class="text-blue-600 font-medium">
-                        {{ event.availableSeats }} seat{{ event.availableSeats > 1 ? 's' : '' }} left
-                      </span>
-                    </p>
-                  </div>
+                  <p><strong>Location:</strong> {{ event.location }}</p>
+                  <p><strong>Organizer:</strong> {{ event.organizerName }}</p>
+                  <p class="flex justify-between items-center">
+                    <span><strong>Price:</strong> ₹{{ event.price }}</span>
+                    <span class="text-blue-600 font-medium">
+                      {{ event.availableSeats }} seat{{ event.availableSeats > 1 ? 's' : '' }} left
+                    </span>
+                  </p>
                 </div>
               </div>
-  
-              <!-- Footer -->
-              <div class="px-5 pb-5 pt-3 flex justify-center">
-                <button class="cursor-pointer bg-red-600 hover:bg-white hover:text-red-600 hover:border-2 text-white text-lg font-medium px-4 py-2 rounded-lg transition w-full text-center font-header">
-                  <a routerLink="/event/{{event.id}}" >View Details</a>
+            </div>
+
+            <!-- Footer with Action Buttons -->
+            <div class="px-5 pb-5 space-y-3">
+              <!-- Primary Action - View Details -->
+              <button class="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-medium px-4 py-2 rounded-lg transition-colors font-header">
+                <a routerLink="admin/event/{{event.id}}" class="block w-full h-full">Edit Details</a>
+              </button>
+              
+              <!-- Secondary Actions Row -->
+              <div class="flex gap-3">
+                <button class="cursor-pointer text-lg flex-1 bg-blue-50 hover:bg-blue-100 border-2 border-blue-200 text-blue-700 font-medium px-3 py-2 rounded-lg transition-colors font-header" 
+                        (click)="handleGetBooking(event.id)"  >
+                  📊 Get Bookings
+                </button>
+                
+                <button class="cursor-pointer text-lg flex-1 bg-red-50 hover:bg-red-100 border-2 border-red-200 text-red-600  font-medium px-3 py-2 rounded-lg transition-colors font-header" 
+                        (click)="handleCancelEvent(event.id)">
+                  ❌ Cancel Event
                 </button>
               </div>
             </div>
-          }
-        </div>
-  
-        <!-- Pagination Controls -->
-        @if (events.length > pageSize) {
-          <div class="flex justify-center mt-10 flex-wrap gap-2">
-            <button
-              class="px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
-              (click)="goToPage(page - 1)"
-              [disabled]="page === 1">
-              Prev
-            </button>
-  
-            @for (pageNum of pages; track pageNum) {
-              <button
-                class="px-3 py-2 rounded-lg border text-sm font-medium"
-                [class.bg-red-600]="pageNum === page"
-                [class.text-white]="pageNum === page"
-                [class.text-gray-700]="pageNum !== page"
-                [class.bg-white]="pageNum !== page"
-                (click)="goToPage(pageNum)">
-                {{ pageNum }}
-              </button>
-            }
-  
-            <button
-              class="px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
-              (click)="goToPage(page + 1)"
-              [disabled]="page === totalPages">
-              Next
-            </button>
           </div>
         }
+      </div>
+
+      <!-- Pagination Controls -->
+      @if (events.length > pageSize) {
+        <div class="flex justify-center mt-10 flex-wrap gap-2">
+          <button
+            class="px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
+            (click)="goToPage(page - 1)"
+            [disabled]="page === 1">
+            Prev
+          </button>
+
+          @for (pageNum of pages; track pageNum) {
+            <button
+              class="px-3 py-2 rounded-lg border text-sm font-medium"
+              [class.bg-red-600]="pageNum === page"
+              [class.text-white]="pageNum === page"
+              [class.text-gray-700]="pageNum !== page"
+              [class.bg-white]="pageNum !== page"
+              (click)="goToPage(pageNum)">
+              {{ pageNum }}
+            </button>
+          }
+
+          <button
+            class="px-4 py-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 text-sm"
+            (click)="goToPage(page + 1)"
+            [disabled]="page === totalPages">
+            Next
+          </button>
+        </div>
       }
-    </div>
+    }
   </div>
-  
+</div>

@@ -1,1 +1,67 @@
-<p>admin works!</p>
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-rose-100 font-body">
+
+    <!-- Hero Section -->
+    <section class="relative w-full h-[300px] md:h-[400px] bg-rose-600 text-white flex items-center justify-center text-center px-4">
+      <div class="z-10">
+        <h1 class="text-4xl md:text-5xl font-bold font-header">Welcome, {{ adminName }} 👋</h1>
+        <p class="mt-4 text-lg md:text-xl">You're not just an organizer — you're the heartbeat of events!</p>
+      </div>
+      <div class="absolute inset-0 bg-rose-700 opacity-40"></div>
+    </section>
+  
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto p-6 md:p-10">
+  
+      <!-- Create Event Button -->
+      <div class="flex justify-center mb-10">
+        <a
+          routerLink="/event/create"
+          class="cursor-pointer bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-6 rounded-xl text-lg shadow-lg transition duration-300"
+        >
+          ➕ Create New Event
+        </a>
+      </div>
+  
+      <!-- Who You Are Card -->
+      <div class="bg-white rounded-2xl shadow-lg border border-rose-200 p-6 mb-12 text-center">
+        <h2 class="text-2xl font-bold text-rose-600 mb-2">You Are an Organizer</h2>
+        <p class="text-gray-700 text-md">
+          As an event organizer, you can manage every aspect of your events — from creation and updates to handling bookings, tracking attendee information, and managing payments.
+        </p>
+      </div>
+  
+      <!-- Features Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-rose-200">
+          <h2 class="text-xl font-bold text-rose-600 mb-2">🎉 Create & Manage Events</h2>
+          <p class="text-gray-700">Build engaging events, edit details, and delete old ones to keep your lineup fresh.</p>
+        </div>
+  
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-rose-200">
+          <h2 class="text-xl font-bold text-rose-600 mb-2">📋 View All Bookings</h2>
+          <p class="text-gray-700">Get a list of attendees for every event. Know who’s attending, when, and for which event.</p>
+        </div>
+  
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-rose-200">
+          <h2 class="text-xl font-bold text-rose-600 mb-2">💳 Payment Tracking</h2>
+          <p class="text-gray-700">Track who has paid and who hasn’t. Easily identify pending payments from attendees.</p>
+        </div>
+  
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-rose-200">
+          <h2 class="text-xl font-bold text-rose-600 mb-2">📈 Monitor Event Performance</h2>
+          <p class="text-gray-700">Keep an eye on ticket sales, popular events, and engagement to refine your strategy.</p>
+        </div>
+  
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-rose-200">
+          <h2 class="text-xl font-bold text-rose-600 mb-2">🧾 Export Reports</h2>
+          <p class="text-gray-700">Download attendee lists, payment summaries, and booking histories with a click.</p>
+        </div>
+  
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-rose-200">
+          <h2 class="text-xl font-bold text-rose-600 mb-2">🔐 Secure & Role-based</h2>
+          <p class="text-gray-700">Only organizers can perform admin actions — ensuring your system stays secure and reliable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

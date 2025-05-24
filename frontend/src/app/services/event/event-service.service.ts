@@ -22,11 +22,28 @@ export class EventServiceService {
 
   getAdminEvents(): Observable<{ events: Events[] }> {
 
-    const token = localStorage.getItem('token'); // or however you store it
+    const token = localStorage.getItem('token'); 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
     const organizerName = localStorage.getItem('fullName');
     return this.http.get<{ events: Events[] }>(`${this.baseURl}/my-events?organizerName=${organizerName}`,{headers: headers});
   }
+
+  addEvent(formData: FormData): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.post(`${this.baseURl}/add`, formData, { headers });
+  }
+
+  deleteEvent(id:number):Observable<void> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.delete<void>(`${this.baseURl}/delete/${id}`, { headers });
+  }
+  
 }

@@ -12,7 +12,7 @@ export class BookingsService {
   constructor(private http: HttpClient) {}
 
   createBooking(booking: BookingRequest): Observable<BookingResponse> {
-    const token = localStorage.getItem('token'); // or however you store it
+    const token = localStorage.getItem('token'); 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -22,11 +22,31 @@ export class BookingsService {
   }
 
   getBookingsById(id:number):Observable<{bookings: BookingResponse[]}>{
-    const token = localStorage.getItem('token'); // or however you store it
+    const token = localStorage.getItem('token'); 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
     return this.http.get<{bookings: BookingResponse[]}>(`${this.baseUrl}/user/${id}`, {
+      headers: headers,
+    });
+  }
+
+  updateBookingById(id:number,updatedSeats:number):Observable<BookingResponse>{
+    const token = localStorage.getItem('token'); 
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.put<BookingResponse>(`${this.baseUrl}/update/${id}?updatedSeats=${updatedSeats}`,{}, {
+      headers: headers,
+    });
+  }
+
+  getBookingsByEventId(id:number):Observable<{bookings: BookingResponse[]}>{
+    const token = localStorage.getItem('token'); 
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get<{bookings: BookingResponse[]}>(`${this.baseUrl}/event/${id}`, {
       headers: headers,
     });
   }

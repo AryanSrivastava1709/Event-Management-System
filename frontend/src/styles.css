@@ -205,3 +205,11 @@ button.toast-close-button {
     width: 25em;
   }
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #e11d48;
+  border-radius: 10px;
+}

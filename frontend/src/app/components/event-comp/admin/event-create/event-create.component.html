@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-rose-100 py-12 px-6 md:px-20">
+    <div class="max-w-4xl mx-auto bg-white border border-rose-200 shadow-2xl rounded-3xl p-10 space-y-10">
+      <h2 class="text-4xl font-extrabold text-center text-rose-600">Create a New Event</h2>
+      <p class="text-center text-gray-500 text-sm">Add a new event with full details, ticketing and images.</p>
+  
+      <form [formGroup]="eventForm" (ngSubmit)="submitEvent()" class="space-y-8">
+        <!-- Grid Inputs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-gray-700 mb-2 font-medium">Event Name</label>
+            <input formControlName="eventName" type="text" placeholder="Guns N' Roses Live"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 placeholder-gray-400 text-gray-800 shadow-sm transition duration-200" />
+          </div>
+  
+          <div>
+            <label class="block text-gray-700 mb-2 font-medium">Location</label>
+            <input formControlName="location" type="text" placeholder="Mumbai, India"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 placeholder-gray-400 text-gray-800 shadow-sm transition duration-200" />
+          </div>
+  
+          <div>
+            <label class="block text-gray-700 mb-2 font-medium">Date</label>
+            <input formControlName="date" type="date"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 text-gray-800 shadow-sm transition duration-200" />
+          </div>
+  
+          <div>
+            <label class="block text-gray-700 mb-2 font-medium">Time</label>
+            <input formControlName="time" type="time"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 text-gray-800 shadow-sm transition duration-200" />
+          </div>
+        </div>
+  
+        <!-- Description -->
+        <div>
+          <label class="block text-gray-700 mb-2 font-medium">Description</label>
+          <textarea formControlName="description" rows="4" placeholder="Event Description"
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 placeholder-gray-400 text-gray-800 shadow-sm transition duration-200 resize-none"></textarea>
+        </div>
+  
+        <!-- Price and Seats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-gray-700 mb-2 font-medium">Ticket Price (₹)</label>
+            <input formControlName="price" type="number"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 placeholder-gray-400 text-gray-800 shadow-sm transition duration-200" />
+          </div>
+  
+          <div>
+            <label class="block text-gray-700 mb-2 font-medium">Available Seats</label>
+            <input formControlName="availableSeats" type="number"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-500 placeholder-gray-400 text-gray-800 shadow-sm transition duration-200" />
+          </div>
+        </div>
+  
+        <!-- Image Upload -->
+        <div class="">
+          <label class=" block text-gray-700 mb-2 font-medium ">Event Banner</label>
+          <input type="file" (change)="onFileChange($event)"
+            class="cursor-pointer block w-full text-sm file:py-2 file:px-4 file:border file:rounded-xl file:text-sm file:font-semibold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100" />
+        </div>
+  
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" [disabled]="loading"
+            class=" cursor-pointer w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-6 rounded-2xl shadow-md transition duration-300 ease-in-out hover:scale-[1.01] active:scale-95">
+            {{ loading ? 'Creating Event...' : ' Create Event' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
