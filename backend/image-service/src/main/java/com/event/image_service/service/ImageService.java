@@ -17,7 +17,7 @@ public class ImageService {
     @Autowired
     private Cloudinary cloudinary;
 
-    public ResponseEntity<?> uploadImage(MultipartFile file) throws IOException{
+    public ResponseEntity<Object> uploadImage(MultipartFile file) throws IOException{
 
         try {
             Map<?,?> result = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("resource_type", "auto","public_id", file.getOriginalFilename(),"folder", "event_images"));

@@ -12,5 +12,5 @@ public interface ImageInterface {
 
 
     @PostMapping(value = "/api/images/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImage(@RequestPart("file") MultipartFile file);  
+    public ResponseEntity<Object> uploadImage(@RequestPart("file") MultipartFile file);  
 }
