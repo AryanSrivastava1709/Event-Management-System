@@ -11,6 +11,7 @@ import { AdminEventsComponent } from './components/event-comp/admin/admin-events
 import { BookingComponent } from './components/booking/booking.component';
 import { EventCreateComponent } from './components/event-comp/admin/event-create/event-create.component';
 import { EventBookingsComponent } from './components/event-comp/admin/event-bookings/event-bookings.component';
+import { EventEditComponent } from './components/event-comp/admin/event-edit/event-edit.component';
 
 let role = localStorage.getItem('role')!;
 export const routes: Routes = [
@@ -44,6 +45,12 @@ export const routes: Routes = [
   {
     path: 'admin/event/:eventId',
     component: EventBookingsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] },
+  },
+  {
+    path: 'admin/event/edit/:eventId',
+    component: EventEditComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ADMIN'] },
   },
