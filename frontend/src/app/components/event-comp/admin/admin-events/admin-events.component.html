@@ -77,10 +77,12 @@
             <!-- Footer with Action Buttons -->
             <div class="px-5 pb-5 space-y-3">
               <!-- Primary Action - View Details -->
-              <button class="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-medium px-4 py-2 rounded-lg transition-colors font-header">
-                <a routerLink="admin/event/{{event.id}}" class="block w-full h-full">Edit Details</a>
+              <button 
+                class="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-medium px-4 py-2 rounded-lg transition-colors font-header"
+                (click)="handleEditBooking(event.id)">
+                Edit Details
               </button>
-              
+  
               <!-- Secondary Actions Row -->
               <div class="flex gap-3">
                 <button class="cursor-pointer text-lg flex-1 bg-blue-50 hover:bg-blue-100 border-2 border-blue-200 text-blue-700 font-medium px-3 py-2 rounded-lg transition-colors font-header" 

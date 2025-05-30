@@ -7,7 +7,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-events',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule],
   templateUrl: './admin-events.component.html',
   styleUrl: './admin-events.component.css'
 })
@@ -50,6 +50,10 @@ export class AdminEventsComponent {
 
     handleGetBooking(eventId:number){
       this.router.navigate(['/admin/event', eventId]);
+    }
+
+    handleEditBooking(eventId: number) {
+      this.router.navigate(['/admin/event/edit', eventId]);
     }
 
     fetchEvents(): void {
