@@ -126,7 +126,3 @@ Awesome! Based on the models we just discussed, here is a clear and simple **ER 
 - We’re using **Foreign Keys** (`user_id`, `event_id`, `booking_id`) to link tables.
 - You can add indexes and constraints as needed.
 - This ERD is perfect for MySQL and aligns with your microservices setup — each service can manage its own table, and use IDs to interact via APIs.
-
----
-
-Would you like a **visual PNG version** of this diagram? I can generate and send you one.
