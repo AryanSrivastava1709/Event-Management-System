@@ -1,7 +1,3 @@
-Great — let’s break down **what services you'll need in your Event Management System** based on your goals (registration, login, payment, microservices, JWT, MySQL, etc.).
-
----
-
 ## ✅ Core Microservices Required
 
 | Service Name         | Purpose                                                               |
