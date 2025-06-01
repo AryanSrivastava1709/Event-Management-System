@@ -24,7 +24,8 @@ export class BookingComponent {
   payingBookingId: number | null = null;
 
   updateSeats:number = 1;
-  toggle:boolean = false;
+  activeBookingId: number | null = null;
+
 
   constructor(
     private bookingService: BookingsService,
@@ -57,10 +58,11 @@ export class BookingComponent {
   }
 
   //update the bookings
-  handleToggle(seats: number) {
-    this.updateSeats = seats
-    this.toggle = !this.toggle;
+  handleToggle(bookingId: number, seats: number) {
+    this.updateSeats = seats;
+    this.activeBookingId = this.activeBookingId === bookingId ? null : bookingId;
   }
+  
 
   handleUpdateBooking(id:number) {
     this.loading = true;
@@ -74,12 +76,12 @@ export class BookingComponent {
         });
         this.loading = false;
         this.toastr.success('Booking updated successfully', 'Success');
-        this.toggle = !this.toggle;
+        this.activeBookingId = null; 
       },
       error: (err) =>{
         this.loading = false;
         this.toastr.error('Failed to update booking', 'Error');
-        this.toggle = !this.toggle;
+        this.activeBookingId = null; 
       }
     })
   }
@@ -199,11 +201,9 @@ export class BookingComponent {
       .subscribe({
         next: () => {
           this.loading = true;
-          setTimeout(() => {
-            this.toastr.success('Payment successful. Explore More', 'Success');
-            this.router.navigate(['/events']);
-            this.loading = false;
-          }, 100);
+          this.toastr.success('Payment successful. Explore More', 'Success');
+          this.router.navigate(['/events']);
+          this.loading = false;
         },
         error: () => {
           setTimeout(() => {

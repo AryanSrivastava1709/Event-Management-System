@@ -18,7 +18,7 @@
 
   <!-- Booking Cards -->
   @if (!loading && bookings.length > 0) {
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
     @for (booking of bookings; track booking.id) {
     <div
       class="bg-white shadow-md border-2 border-rose-200 rounded-2xl p-6 space-y-4 relative overflow-hidden"
@@ -110,7 +110,7 @@
         <button
           class="cursor-pointer mt-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl w-full transition duration-200 flex items-center justify-center gap-2"
           [disabled]="payingBookingId === booking.id"
-          (click)="handleToggle(booking.seatsBooked)"
+          (click)="handleToggle(booking.id,booking.seatsBooked)"
         >
           Edit Booking
         </button>
@@ -124,7 +124,7 @@
       </div>
 
       <!-- Update Booking Modal -->
-      @if(toggle){
+      @if(activeBookingId === booking.id){
         <div class="pt-6 relative z-0 max-w-md mx-auto">
           <label class="block text-gray-800 text-lg font-semibold mb-3">
             🎫 Select Number of Tickets <span class="text-red-500">*</span>
