@@ -23,14 +23,12 @@
               <li><a routerLink="/events" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition">All Events</a></li>
               <li><a routerLink="/about" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700  px-3 py-1 rounded transition">About</a></li>
               <li><a routerLink="/profile" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition">Profile</a></li>
-              <li><a (click)="logout()" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition cursor-pointer">Logout</a></li>
             }@else {
               <li><a [routerLink]="goToHome()" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition cursor-pointer">Home</a></li>
               <li><a routerLink="/events" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition">Events</a></li>
               <li><a routerLink="/bookings" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition">Bookings</a></li>
               <li><a routerLink="/about" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700  px-3 py-1 rounded transition">About</a></li>
               <li><a routerLink="/profile" routerLinkActive="bg-white text-rose-700" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition">Profile</a></li>
-              <li><a (click)="logout()" class="hover:bg-white hover:text-rose-700 px-3 py-1 rounded transition cursor-pointer">Logout</a></li>
             }
           }
         </ul>
@@ -49,7 +47,6 @@
         } @else {
           <a (click)="goToHome()" class="block hover:text-gray-100 cursor-pointer">Home</a>
           <a routerLink="/profile" class="block hover:text-gray-100">Profile</a>
-          <a (click)="logout()" class="block hover:text-gray-100 cursor-pointer">Logout</a>
         }
       </div>
     }

@@ -1,1 +1,127 @@
-<p>profile works!</p>
+
+<body class="bg-gradient-to-br from-red-50 via-white to-red-100 min-h-screen">
+    <div class="container mx-auto p-6 max-w-6xl">
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-t-2xl shadow-2xl">
+            <div class="px-8 py-6">
+                <!-- Top Navigation -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white">Profile Dashboard</h1>
+                            <p class="text-red-100">Welcome back to your account</p>
+                        </div>
+                    </div>
+                    <button (click)="logout()" class="cursor-pointer bg-white text-red-600 px-6 py-2 rounded-lg font-semibold hover:bg-red-50 transition-all duration-300 shadow-lg">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="bg-white rounded-b-2xl shadow-2xl">
+            <!-- Profile Header -->
+            <div class="border-b border-red-100 p-8">
+                <div class="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-8">
+                    <!-- Profile Avatar -->
+                    <div class="relative">
+                        <div class="w-32 h-32 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center shadow-xl">
+                            <span class="text-4xl font-bold text-white">{{userProfile.fullName.charAt(0)}}</span>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Profile Info -->
+                    <div class="flex-1 text-center lg:text-left">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2">{{userProfile.fullName}}</h2>
+                        <p class="text-lg text-red-600 font-semibold mb-4">{{getRoleDisplayName()}}</p>
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                            <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium">Active User</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col space-y-3">
+                        <button class="cursor-pointer bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 shadow-lg">
+                            Edit Profile
+                        </button>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information Grid -->
+            <div class="p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <svg class="w-6 h-6 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                    </svg>
+                    Contact Information
+                </h3>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Email Card -->
+                    <div class="bg-gradient-to-br from-red-50 to-white border border-red-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Email Address</h4>
+                                <p class="text-sm text-gray-500">Primary contact</p>
+                            </div>
+                        </div>
+                        <p class="text-red-700 font-medium break-all">{{userProfile.email}}</p>
+                    </div>
+
+                    <!-- Mobile Card -->
+                    <div class="bg-gradient-to-br from-red-50 to-white border border-red-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Mobile Number</h4>
+                                <p class="text-sm text-gray-500">Phone contact</p>
+                            </div>
+                        </div>
+                        <p class="text-red-700 font-medium">{{userProfile.mobile}}</p>
+                    </div>
+
+                    <!-- Role Card -->
+                    <div class="bg-gradient-to-br from-red-50 to-white border border-red-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">User Role</h4>
+                                <p class="text-sm text-gray-500">Account type</p>
+                            </div>
+                        </div>
+                        <p class="text-red-700 font-medium">{{getRoleDisplayName()}}</p>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            
+        </div>
+    </div>
+</body>
