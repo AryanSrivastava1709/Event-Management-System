@@ -12,8 +12,10 @@ import { BookingComponent } from './components/booking/booking.component';
 import { EventCreateComponent } from './components/event-comp/admin/event-create/event-create.component';
 import { EventBookingsComponent } from './components/event-comp/admin/event-bookings/event-bookings.component';
 import { EventEditComponent } from './components/event-comp/admin/event-edit/event-edit.component';
+import { AboutComponent } from './components/about/about.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
-let role = localStorage.getItem('role')!;
+
 export const routes: Routes = [
   {
     path: 'admin/dashboard',
@@ -71,5 +73,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['USER'] },
   },
+  {path: 'about',component:AboutComponent},
+  {path:'profile',component:ProfileComponent,canActivate: [AuthGuard], data: { roles: ['USER', 'ADMIN'] }},
   { path: '**', component: PageNotFoundComponent },
 ];
